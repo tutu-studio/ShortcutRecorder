@@ -87,15 +87,15 @@ The framework supports [module maps](https://clang.llvm.org/docs/Modules.html), 
 
 ### Swift Package Manager
 
-	.package(url: "git://github.com/Kentzo/ShortcutRecorder.git", from: "3.3.0")
+	.package(url: "git://github.com/Kentzo/ShortcutRecorder.git", from: "3.4.0")
 
 ### CocoaPods
 
-    pod 'ShortcutRecorder', '~> 3.3.0'
+    pod 'ShortcutRecorder', '~> 3.4.0'
 
 ### Carthage
 
-    github "Kentzo/ShortcutRecorder" ~> 3.3.0
+    github "Kentzo/ShortcutRecorder" ~> 3.4.0
 
 Prebuilt frameworks are available via GitHub releases.
 
