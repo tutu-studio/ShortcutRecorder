@@ -4,6 +4,7 @@
 
 [![CocoaPods Compatible](https://img.shields.io/badge/CocoaPods-Compatible%201.8+-success.svg)](https://cocoapods.org/pods/ShortcutRecorder)
 [![Carthage Compatible](https://img.shields.io/badge/Carthage-Compatible-success.svg)](https://github.com/Carthage/Carthage)
+[![SPM Compatible](https://img.shields.io/badge/SPM-Compatible-success.svg)](https://swiftpackageindex.com/Kentzo/ShortcutRecorder)
 
 [![Coverage](https://codecov.io/gh/Kentzo/ShortcutRecorder/branch/master/graph/badge.svg)](https://codecov.io/gh/Kentzo/ShortcutRecorder)
 [![Build Status](https://travis-ci.org/Kentzo/ShortcutRecorder.svg?branch=master)](https://travis-ci.org/Kentzo/ShortcutRecorder)
@@ -86,15 +87,15 @@ The framework supports [module maps](https://clang.llvm.org/docs/Modules.html), 
 
 ### Swift Package Manager
 
-	.package(url: "git://github.com/Kentzo/ShortcutRecorder.git", from: "3.3.0")
+	.package(url: "git://github.com/Kentzo/ShortcutRecorder.git", from: "3.4.0")
 
 ### CocoaPods
 
-    pod 'ShortcutRecorder', '~> 3.3.0'
+    pod 'ShortcutRecorder', '~> 3.4.0'
 
 ### Carthage
 
-    github "Kentzo/ShortcutRecorder" ~> 3.3.0
+    github "Kentzo/ShortcutRecorder" ~> 3.4.0
 
 Prebuilt frameworks are available via GitHub releases.
 

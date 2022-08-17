@@ -1,3 +1,15 @@
+3.4.0 (2022-08-17)
+---
+
+Improvements:
+
+- Remove most of the deprecated methods with exception of delegates
+- Fix missing NS_DESIGNATED_INITIALIZER
+
+Fixes:
+
+- Fix incorrect comparison of style image cache keys that led to 100% miss by [@ninjaprox](https://github.com/ninjaprox)
+
 3.3.0 (2020-07-12)
 ---
 

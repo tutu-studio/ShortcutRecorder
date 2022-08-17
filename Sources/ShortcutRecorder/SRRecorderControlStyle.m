@@ -502,7 +502,7 @@ NSUserInterfaceLayoutDirection SRRecorderControlStyleComponentsLayoutDirectionTo
 
     return [self.identifier isEqual:anObject.identifier] &&
         [self.components isEqual:anObject.components] &&
-        [self.name isEqual:anObject];
+        [self.name isEqual:anObject.name];
 }
 
 - (id)copyWithZone:(NSZone *)aZone
@@ -1249,7 +1249,7 @@ NSUserInterfaceLayoutDirection SRRecorderControlStyleComponentsLayoutDirectionTo
 
 - (NSString *)noValueRecordingLabel
 {
-    return SRLoc(@"Type shortcut");
+    return SRLoc(@"Press keys now");
 }
 
 - (void)prepareForRecorderControl:(SRRecorderControl *)aControl
