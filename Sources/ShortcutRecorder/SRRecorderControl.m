@@ -5,7 +5,7 @@
 
 #import <limits.h>
 #import <objc/runtime.h>
-#import <os/trace.h>
+#import <os/log.h>
 #import <os/activity.h>
 
 #import "ShortcutRecorder/SRShortcutAction.h"
@@ -755,12 +755,12 @@ static void *_SRStyleGuideObservingContext = &_SRStyleGuideObservingContext;
 
     if (left && center && right)
     {
-        os_trace_debug("#Developer drawing background using images");
+        os_log_debug(OS_LOG_DEFAULT, "#Developer drawing background using images");
         NSDrawThreePartImage(backgroundFrame, left, center, right, NO, NSCompositeSourceOver, 1.0, self.isFlipped);
     }
     else
     {
-        os_trace_debug("#Developer drawing background using color");
+        os_log_debug(OS_LOG_DEFAULT, "#Developer drawing background using color");
 
         if (self.isOpaque)
             [NSColor.windowBackgroundColor setFill];
@@ -974,7 +974,7 @@ static void *_SRStyleGuideObservingContext = &_SRStyleGuideObservingContext;
         ([boundObject isKindOfClass:NSUserDefaults.class] || [boundObject isKindOfClass:NSUserDefaultsController.class]) &&
         [aValue isKindOfClass:SRShortcut.class])
     {
-        os_trace_error("#Error The control is bound to NSUserDefaults but is not transformed into an allowed CFPreferences value");
+        os_log_error(OS_LOG_DEFAULT, "#Error The control is bound to NSUserDefaults but is not transformed into an allowed CFPreferences value");
         NSLog(@"WARNING: Shortcut Recroder 2 compatibility mode enabled. Getters of objectValue and NSValueBinding will return an instance of NSDictionary.");
         _isCompatibilityModeEnabled = YES;
 
@@ -1009,17 +1009,17 @@ static void *_SRStyleGuideObservingContext = &_SRStyleGuideObservingContext;
 {
     if (!self.enabled)
     {
-        os_trace_debug("The control is disabled");
+        os_log_debug(OS_LOG_DEFAULT, "The control is disabled");
         return NO;
     }
     else if (self.window.firstResponder != self)
     {
-        os_trace_debug("The control is not the first responder");
+        os_log_debug(OS_LOG_DEFAULT, "The control is not the first responder");
         return NO;
     }
     else if (self->_mouseTrackingButtonTag != _SRRecorderControlInvalidButtonTag)
     {
-        os_trace_debug("The control is tracking %lu", self->_mouseTrackingButtonTag);
+        os_log_debug(OS_LOG_DEFAULT, "The control is tracking %lu", self->_mouseTrackingButtonTag);
         return NO;
     }
     else
@@ -1049,18 +1049,18 @@ static void *_SRStyleGuideObservingContext = &_SRStyleGuideObservingContext;
         {
             if (DelegateCanRecordShortcut(aShortcut))
             {
-                os_trace_debug("Valid and accepted shortcut");
+                os_log_debug(OS_LOG_DEFAULT, "Valid and accepted shortcut");
                 result = YES;
             }
             else
             {
-                os_trace_debug("Delegate rejected");
+                os_log_debug(OS_LOG_DEFAULT, "Delegate rejected");
                 result = NO;
             }
         }
         else
         {
-            os_trace_debug("Modifier flags %lu rejected", aShortcut.modifierFlags);
+            os_log_debug(OS_LOG_DEFAULT, "Modifier flags %lu rejected", aShortcut.modifierFlags);
             result = NO;
         }
     });
@@ -1737,14 +1737,14 @@ static void *_SRStyleGuideObservingContext = &_SRStyleGuideObservingContext;
             {
                 // This shouldn't really happen ever, but was rarely observed.
                 // See https://github.com/Kentzo/ShortcutRecorder/issues/40
-                os_trace_debug("Invalid key code");
+                os_log_debug(OS_LOG_DEFAULT, "Invalid key code");
                 result = NO;
             }
             else if (self.allowsEscapeToCancelRecording &&
                 anEvent.keyCode == SRKeyCodeEscape &&
                 (anEvent.modifierFlags & SRCocoaModifierFlagsMask) == 0)
             {
-                os_trace_debug("Cancel via Esc");
+                os_log_debug(OS_LOG_DEFAULT, "Cancel via Esc");
                 [self endRecording];
                 result = YES;
             }
@@ -1752,7 +1752,7 @@ static void *_SRStyleGuideObservingContext = &_SRStyleGuideObservingContext;
                     (anEvent.keyCode == SRKeyCodeDelete || anEvent.keyCode == SRKeyCodeForwardDelete) &&
                     (anEvent.modifierFlags & SRCocoaModifierFlagsMask) == 0)
             {
-                os_trace_debug("Clear via Delete");
+                os_log_debug(OS_LOG_DEFAULT, "Clear via Delete");
                 [self clearAndEndRecording];
                 result = YES;
             }
@@ -1773,7 +1773,7 @@ static void *_SRStyleGuideObservingContext = &_SRStyleGuideObservingContext;
         }
         else if (anEvent.keyCode == SRKeyCodeSpace)
         {
-            os_trace_debug("Begin recording via Space");
+            os_log_debug(OS_LOG_DEFAULT, "Begin recording via Space");
             result = [self beginRecording];
         }
         else
