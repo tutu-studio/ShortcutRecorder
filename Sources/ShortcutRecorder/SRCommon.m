@@ -7,6 +7,7 @@
 
 #import "ShortcutRecorder/SRCommon.h"
 
+NSBundle *SRBundle(void);
 
 SRKeyCodeString const SRKeyCodeStringTabRight = @"⇥";
 SRKeyCodeString const SRKeyCodeStringTabLeft = @"⇤";
@@ -36,7 +37,8 @@ SRModifierFlagString const SRModifierFlagStringShift = @"⇧";
 SRModifierFlagString const SRModifierFlagStringControl = @"⌃";
 
 
-NSBundle *SRBundle()
+
+NSBundle *SRBundle(void)
 {
 #ifdef SWIFTPM_MODULE_BUNDLE
     return SWIFTPM_MODULE_BUNDLE;

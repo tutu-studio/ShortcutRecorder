@@ -344,9 +344,16 @@ static void *_SRShortcutActionContext = &_SRShortcutActionContext;
 
         if ([newShortcut isKindOfClass:NSDictionary.class])
             newShortcut = [SRShortcut shortcutWithDictionary:(NSDictionary *)newShortcut];
-        else if ([newShortcut isKindOfClass:NSData.class])
-            newShortcut = [NSKeyedUnarchiver unarchiveObjectWithData:(NSData *)newShortcut];
-        else if ((NSNull *)newShortcut == NSNull.null)
+        else if ([newShortcut isKindOfClass:NSData.class]) {
+            NSError *error = nil;
+            newShortcut = [NSKeyedUnarchiver unarchivedObjectOfClass:[SRShortcut class]
+                                                         fromData:(NSData *)newShortcut
+                                                            error:&error];
+            if (error) {
+                os_log_error(OS_LOG_DEFAULT, "Failed to unarchive shortcut: %{public}@", error.localizedDescription);
+                newShortcut = nil;
+            }
+        } else if ((NSNull *)newShortcut == NSNull.null)
             newShortcut = nil;
 
         @synchronized (self)

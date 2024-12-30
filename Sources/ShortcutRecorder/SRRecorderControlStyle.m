@@ -28,18 +28,22 @@ SRRecorderControlStyleComponentsAppearance SRRecorderControlStyleComponentsAppea
             [(NSMutableDictionary *)Map setObject:@(SRRecorderControlStyleComponentsAppearanceDarkAqua) forKey:NSAppearanceNameDarkAqua];
     });
 
-    NSNumber *appearance = Map[aSystemAppearanceName];
-
+    NSNumber *appearance = nil;
+    if (aSystemAppearanceName) {
+        appearance = Map[aSystemAppearanceName];
+    }
 
     if (@available(macOS 10.14, *))
     {
-        if (!appearance)
+        if (!appearance && aSystemAppearanceName)
         {
             NSAppearance *systemAppearance = [NSAppearance appearanceNamed:aSystemAppearanceName];
-            aSystemAppearanceName = [systemAppearance bestMatchFromAppearancesWithNames:Map.allKeys];
+            if (systemAppearance) {
+                aSystemAppearanceName = [systemAppearance bestMatchFromAppearancesWithNames:Map.allKeys];
 
-            if (aSystemAppearanceName)
-                appearance = Map[aSystemAppearanceName];
+                if (aSystemAppearanceName)
+                    appearance = Map[aSystemAppearanceName];
+            }
         }
     }
 
@@ -148,11 +152,16 @@ NSUserInterfaceLayoutDirection SRRecorderControlStyleComponentsLayoutDirectionTo
     if (aView)
         effectiveSystemAppearance = aView.effectiveAppearance.name;
     else
-        effectiveSystemAppearance = NSAppearance.currentAppearance.name;
+        effectiveSystemAppearance = NSApp.effectiveAppearance.name;
+
+    if (!effectiveSystemAppearance) {
+        effectiveSystemAppearance = NSAppearanceNameAqua;
+    }
 
     __auto_type appearance = SRRecorderControlStyleComponentsAppearanceFromSystem(effectiveSystemAppearance);
     __auto_type tint = SRRecorderControlStyleComponentsTintFromSystem(NSColor.currentControlTint);
     __auto_type accessibility = SRRecorderControlStyleComponentsAccessibilityUnspecified;
+
 
     if (NSWorkspace.sharedWorkspace.accessibilityDisplayShouldIncreaseContrast)
         accessibility = SRRecorderControlStyleComponentsAccessibilityHighContrast;
@@ -320,8 +329,7 @@ NSUserInterfaceLayoutDirection SRRecorderControlStyleComponentsLayoutDirectionTo
          relativeToComponents:(SRRecorderControlStyleComponents *)anIdealComponents
 {
     static NSDictionary<NSNumber *, NSArray<NSNumber *> *> *AppearanceOrderMap = nil;
-    static NSDictionary<NSNumber *, NSArray<NSNumber *> *> *TintOrderMap = nil;
-    static NSDictionary<NSNumber *, NSArray<NSNumber *> *> *DirectionOrderMap = nil;
+
     static dispatch_once_t onceToken;
     dispatch_once(&onceToken, ^{
         AppearanceOrderMap = @{
@@ -345,22 +353,6 @@ NSUserInterfaceLayoutDirection SRRecorderControlStyleComponentsLayoutDirectionTo
                                                               @(SRRecorderControlStyleComponentsAppearanceVibrantLight),
                                                               @(SRRecorderControlStyleComponentsAppearanceAqua),
                                                               @(SRRecorderControlStyleComponentsAppearanceUnspecified)]
-        };
-
-        TintOrderMap = @{
-            @(SRRecorderControlStyleComponentsTintBlue): @[@(SRRecorderControlStyleComponentsTintBlue),
-                                                 @(SRRecorderControlStyleComponentsTintGraphite),
-                                                 @(SRRecorderControlStyleComponentsTintUnspecified)],
-            @(SRRecorderControlStyleComponentsTintGraphite): @[@(SRRecorderControlStyleComponentsTintGraphite),
-                                                     @(SRRecorderControlStyleComponentsTintBlue),
-                                                     @(SRRecorderControlStyleComponentsTintUnspecified)]
-        };
-
-        DirectionOrderMap = @{
-            @(SRRecorderControlStyleComponentsLayoutDirectionLeftToRight): @[@(SRRecorderControlStyleComponentsLayoutDirectionLeftToRight),
-                                                                             @(SRRecorderControlStyleComponentsLayoutDirectionRightToLeft)],
-            @(SRRecorderControlStyleComponentsLayoutDirectionRightToLeft): @[@(SRRecorderControlStyleComponentsLayoutDirectionRightToLeft),
-                                                                             @(SRRecorderControlStyleComponentsLayoutDirectionLeftToRight)]
         };
     });
 

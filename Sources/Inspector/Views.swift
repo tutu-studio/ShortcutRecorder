@@ -21,114 +21,111 @@ extension NSEdgeInsets {
 
 
 extension NSView {
-    static var drawsChessboardToken = "drawsCheckboard"
-    static var chessboardPrimaryColorToken = "chessboardPrimaryColor"
-    static var chessboardSecondaryColorToken = "chessboardSecondaryColor"
-
-    static var drawsBaselineToken = "drawsBaseline"
-    static var baselinePrimaryColorToken = "baselinePrimaryColor"
-    static var baselineSecondaryColorToken = "baselineSecondaryColor"
-
-    static var drawsAlignmentRectToken = "drawsAlignmentRect"
-    static var alignmentRectColorToken = "alignmentRectColor"
-
-    static var scaleToken = "scale"
+    private static var drawsChessboardKey: Void?
+    private static var chessboardPrimaryColorKey: Void?
+    private static var chessboardSecondaryColorKey: Void?
+    private static var drawsBaselineKey: Void?
+    private static var baselinePrimaryColorKey: Void?
+    private static var baselineSecondaryColorKey: Void?
+    private static var drawsAlignmentRectKey: Void?
+    private static var alignmentRectColorKey: Void?
+    private static var scaleKey: Void?
 
     @objc var drawsChessboard: Bool {
         get {
-            return objc_getAssociatedObject(self, &NSView.drawsChessboardToken) as? Bool ?? false
+            return objc_getAssociatedObject(self, &NSView.drawsChessboardKey) as? Bool ?? false
         }
 
         set {
-            objc_setAssociatedObject(self, &NSView.drawsChessboardToken, newValue, .OBJC_ASSOCIATION_ASSIGN)
+            objc_setAssociatedObject(self, &NSView.drawsChessboardKey, newValue, .OBJC_ASSOCIATION_ASSIGN)
             needsDisplay = true
         }
     }
 
     @objc var chessboardPrimaryColor: NSColor {
         get {
-            return objc_getAssociatedObject(self, &NSView.chessboardPrimaryColorToken) as? NSColor ?? NSColor.textBackgroundColor
+            return objc_getAssociatedObject(self, &NSView.chessboardPrimaryColorKey) as? NSColor ?? NSColor.textBackgroundColor
         }
 
         set {
-            objc_setAssociatedObject(self, &NSView.chessboardPrimaryColorToken, newValue, .OBJC_ASSOCIATION_RETAIN)
+            objc_setAssociatedObject(self, &NSView.chessboardPrimaryColorKey, newValue, .OBJC_ASSOCIATION_RETAIN)
             needsDisplay = true
         }
     }
 
     @objc var chessboardSecondaryColor: NSColor {
         get {
-            return objc_getAssociatedObject(self, &NSView.chessboardSecondaryColorToken) as? NSColor ?? NSColor.tertiaryLabelColor
+            return objc_getAssociatedObject(self, &NSView.chessboardSecondaryColorKey) as? NSColor ?? NSColor.tertiaryLabelColor
         }
 
         set {
-            objc_setAssociatedObject(self, &NSView.chessboardSecondaryColorToken, newValue, .OBJC_ASSOCIATION_RETAIN)
+            objc_setAssociatedObject(self, &NSView.chessboardSecondaryColorKey, newValue, .OBJC_ASSOCIATION_RETAIN)
             needsDisplay = true
         }
     }
 
     @objc var drawsBaseline: Bool {
         get {
-            return objc_getAssociatedObject(self, &NSView.drawsBaselineToken) as? Bool ?? false
+            return objc_getAssociatedObject(self, &NSView.drawsBaselineKey) as? Bool ?? false
         }
 
         set {
-            objc_setAssociatedObject(self, &NSView.drawsBaselineToken, newValue, .OBJC_ASSOCIATION_ASSIGN)
+            objc_setAssociatedObject(self, &NSView.drawsBaselineKey, newValue, .OBJC_ASSOCIATION_ASSIGN)
             needsDisplay = true
         }
     }
 
     @objc var baselinePrimaryColor: NSColor {
         get {
-            return objc_getAssociatedObject(self, &NSView.baselinePrimaryColorToken) as? NSColor ?? NSColor.red
+            return objc_getAssociatedObject(self, &NSView.baselinePrimaryColorKey) as? NSColor ?? NSColor.red
         }
 
         set {
-            objc_setAssociatedObject(self, &NSView.baselinePrimaryColorToken, newValue, .OBJC_ASSOCIATION_RETAIN)
+            objc_setAssociatedObject(self, &NSView.baselinePrimaryColorKey, newValue, .OBJC_ASSOCIATION_RETAIN)
             needsDisplay = true
         }
     }
 
     @objc var baselineSecondaryColor: NSColor {
         get {
-            return objc_getAssociatedObject(self, &NSView.baselineSecondaryColorToken) as? NSColor ?? NSColor.blue
+            return objc_getAssociatedObject(self, &NSView.baselineSecondaryColorKey) as? NSColor ?? NSColor.blue
         }
 
         set {
-            objc_setAssociatedObject(self, &NSView.baselineSecondaryColorToken, newValue, .OBJC_ASSOCIATION_RETAIN)
+            objc_setAssociatedObject(self, &NSView.baselineSecondaryColorKey, newValue, .OBJC_ASSOCIATION_RETAIN)
             needsDisplay = true
         }
     }
 
     @objc var drawsAlignmentRect: Bool {
         get {
-            return objc_getAssociatedObject(self, &NSView.drawsAlignmentRectToken) as? Bool ?? false
+            return objc_getAssociatedObject(self, &NSView.drawsAlignmentRectKey) as? Bool ?? false
         }
 
         set {
-            objc_setAssociatedObject(self, &NSView.drawsAlignmentRectToken, newValue, .OBJC_ASSOCIATION_ASSIGN)
+            objc_setAssociatedObject(self, &NSView.drawsAlignmentRectKey, newValue, .OBJC_ASSOCIATION_ASSIGN)
             needsDisplay = true
         }
     }
 
     @objc var alignmentRectColor: NSColor {
         get {
-            return objc_getAssociatedObject(self, &NSView.alignmentRectColorToken) as? NSColor ?? NSColor.red
+            return objc_getAssociatedObject(self, &NSView.alignmentRectColorKey) as? NSColor ?? NSColor.red
         }
 
         set {
-            objc_setAssociatedObject(self, &NSView.alignmentRectColorToken, newValue, .OBJC_ASSOCIATION_RETAIN)
+            objc_setAssociatedObject(self, &NSView.alignmentRectColorKey, newValue, .OBJC_ASSOCIATION_RETAIN)
             needsDisplay = true
         }
     }
 
     @objc var scale: CGFloat {
         get {
-            return objc_getAssociatedObject(self, &NSView.scaleToken) as? CGFloat ?? 2.0
+            return objc_getAssociatedObject(self, &NSView.scaleKey) as? CGFloat ?? 2.0
         }
 
         set {
-            objc_setAssociatedObject(self, &NSView.scaleToken, newValue, .OBJC_ASSOCIATION_ASSIGN)
+            objc_setAssociatedObject(self, &NSView.scaleKey, newValue, .OBJC_ASSOCIATION_ASSIGN)
             needsDisplay = true
         }
     }
@@ -162,7 +159,7 @@ extension NSView {
         #if TARGET_INTERFACE_BUILDER
         return
         #endif
-        
+
         precondition(isFlipped)
 
         NSGraphicsContext.saveGraphicsState()

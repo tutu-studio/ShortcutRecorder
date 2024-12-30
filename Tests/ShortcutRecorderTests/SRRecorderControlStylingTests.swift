@@ -8,7 +8,7 @@ import XCTest
 import ShortcutRecorder
 
 
-extension RecorderControlStyle.Components.Appearance: CaseIterable {
+extension RecorderControlStyle.Components.Appearance: @retroactive CaseIterable {
     public typealias AllCases = [RecorderControlStyle.Components.Appearance]
 
     public static var allCases: [RecorderControlStyle.Components.Appearance] {
@@ -39,7 +39,7 @@ extension RecorderControlStyle.Components.Appearance: CaseIterable {
     }
 }
 
-extension RecorderControlStyle.Components.Accessibility: Hashable, CaseIterable {
+extension RecorderControlStyle.Components.Accessibility: @retroactive Hashable, @retroactive CaseIterable {
     public typealias AllCases = [RecorderControlStyle.Components.Accessibility]
 
     public func hash(into hasher: inout Hasher) {
@@ -68,7 +68,7 @@ extension RecorderControlStyle.Components.Accessibility: Hashable, CaseIterable 
     }
 }
 
-extension RecorderControlStyle.Components.LayoutDirection: CaseIterable {
+extension RecorderControlStyle.Components.LayoutDirection: @retroactive CaseIterable {
     public typealias AllCases = [RecorderControlStyle.Components.LayoutDirection]
 
     public static var allCases: [RecorderControlStyle.Components.LayoutDirection] {
@@ -93,7 +93,7 @@ extension RecorderControlStyle.Components.LayoutDirection: CaseIterable {
     }
 }
 
-extension RecorderControlStyle.Components.Tint: CaseIterable {
+extension RecorderControlStyle.Components.Tint: @retroactive CaseIterable {
     public typealias AllCases = [RecorderControlStyle.Components.Tint]
 
     public static var allCases: [RecorderControlStyle.Components.Tint] {

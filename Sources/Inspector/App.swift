@@ -18,7 +18,7 @@ class AppDelegate: NSObject, NSApplicationDelegate, ShortcutActionTarget {
     override func awakeFromNib() {
 
         let shortcut = Shortcut(code: KeyCode.ansiA, modifierFlags: [.shift, .control, .option, .command], characters: "A", charactersIgnoringModifiers: "a")
-        let shortcutData = NSKeyedArchiver.archivedData(withRootObject: shortcut)
+        let shortcutData = try! NSKeyedArchiver.archivedData(withRootObject: shortcut, requiringSecureCoding: true)
 
         UserDefaults.standard.register(defaults: [
             "NSFullScreenMenuItemEverywhere": false,

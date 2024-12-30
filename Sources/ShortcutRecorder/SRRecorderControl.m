@@ -756,7 +756,7 @@ static void *_SRStyleGuideObservingContext = &_SRStyleGuideObservingContext;
     if (left && center && right)
     {
         os_log_debug(OS_LOG_DEFAULT, "#Developer drawing background using images");
-        NSDrawThreePartImage(backgroundFrame, left, center, right, NO, NSCompositeSourceOver, 1.0, self.isFlipped);
+        NSDrawThreePartImage(backgroundFrame, left, center, right, NO, NSCompositingOperationSourceOver, 1.0, self.isFlipped);
     }
     else
     {
@@ -848,7 +848,7 @@ static void *_SRStyleGuideObservingContext = &_SRStyleGuideObservingContext;
         return;
 
     [NSGraphicsContext saveGraphicsState];
-    [image drawInRect:cancelButtonFrame fromRect:NSZeroRect operation:NSCompositeSourceOver fraction:1.0 respectFlipped:YES hints:nil];
+    [image drawInRect:cancelButtonFrame fromRect:NSZeroRect operation:NSCompositingOperationSourceOver fraction:1.0 respectFlipped:YES hints:nil];
     [NSGraphicsContext restoreGraphicsState];
 }
 
@@ -872,7 +872,7 @@ static void *_SRStyleGuideObservingContext = &_SRStyleGuideObservingContext;
         return;
 
     [NSGraphicsContext saveGraphicsState];
-    [image drawInRect:clearButtonFrame fromRect:NSZeroRect operation:NSCompositeSourceOver fraction:1.0 respectFlipped:YES hints:nil];
+    [image drawInRect:clearButtonFrame fromRect:NSZeroRect operation:NSCompositingOperationSourceOver fraction:1.0 respectFlipped:YES hints:nil];
     [NSGraphicsContext restoreGraphicsState];
 }
 
@@ -982,11 +982,6 @@ static void *_SRStyleGuideObservingContext = &_SRStyleGuideObservingContext;
     }
 
     [boundObject setValue:aValue forKeyPath:boundKeyPath];
-}
-
-- (void)controlTintDidChange:(NSNotification *)aNotification
-{
-    [self scheduleControlViewAppearanceDidChange:aNotification];
 }
 
 - (void)accessibilityDisplayOptionsDidChange:(NSNotification *)aNotification
@@ -1511,9 +1506,6 @@ static void *_SRStyleGuideObservingContext = &_SRStyleGuideObservingContext;
         [NSNotificationCenter.defaultCenter removeObserver:self
                                                       name:NSWindowDidResignKeyNotification
                                                     object:self.window];
-        [NSNotificationCenter.defaultCenter removeObserver:self
-                                                      name:NSControlTintDidChangeNotification
-                                                    object:NSApp];
         [NSWorkspace.sharedWorkspace.notificationCenter removeObserver:self
                                                                   name:NSWorkspaceAccessibilityDisplayOptionsDidChangeNotification
                                                                 object:nil];
@@ -1525,10 +1517,6 @@ static void *_SRStyleGuideObservingContext = &_SRStyleGuideObservingContext;
                                                selector:@selector(endRecording)
                                                    name:NSWindowDidResignKeyNotification
                                                  object:aWindow];
-        [NSNotificationCenter.defaultCenter addObserver:self
-                                               selector:@selector(controlTintDidChange:)
-                                                   name:NSControlTintDidChangeNotification
-                                                 object:NSApp];
         [NSWorkspace.sharedWorkspace.notificationCenter addObserver:self
                                                            selector:@selector(accessibilityDisplayOptionsDidChange:) name:NSWorkspaceAccessibilityDisplayOptionsDidChangeNotification
                                                              object:nil];
